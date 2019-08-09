@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HappeningServiceImpl implements HappeningService {
@@ -29,7 +30,11 @@ public class HappeningServiceImpl implements HappeningService {
 
     @Override
     public Happening find(Long id) {
-        return happeningDAO.getOne(id);
+        Optional<Happening> result = happeningDAO.findById(id);
+        //result.ifPresent(it -> ..) ; // do something with the value if present
+        //result.map(it -> …); // map the value if present
+        return result.orElse(null); // if you want to continue just like before
+
     }
 
     @Override

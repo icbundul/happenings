@@ -11,6 +11,11 @@
 
 GET {{host-url}}//happenings/all
 
+
+###
+
+GET {{host-url}}//happenings/1
+
 ###
 
 POST {{host-url}}/happenings

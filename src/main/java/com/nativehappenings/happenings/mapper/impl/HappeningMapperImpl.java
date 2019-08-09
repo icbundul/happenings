@@ -12,6 +12,7 @@ public class HappeningMapperImpl extends BaseEntityMapper implements HappeningMa
     public HappeningViewModel convertToModel(Happening entity) {
 
         HappeningViewModel viewModel = new HappeningViewModel();
+        // TODO Fix this conversion
         viewModel = (HappeningViewModel) super.convertToBaseEntityViewModel(entity);
         viewModel.setName(entity.getName());
         viewModel.setDateFrom(entity.getDateFrom());

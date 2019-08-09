@@ -5,6 +5,7 @@ import com.nativehappenings.happenings.exceptions.HappeningValidationException;
 import com.nativehappenings.happenings.mapper.HappeningMapper;
 import com.nativehappenings.happenings.model.Happening;
 import com.nativehappenings.happenings.services.HappeningService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,15 +17,13 @@ import java.util.List;
 @CrossOrigin
 public class HappeningController {
 
-    //@Autowired
+    @Autowired
     private HappeningService happeningService;
 
-    //@Autowired
+    @Autowired
     private HappeningMapper happeningMapper;
 
-    public HappeningController(HappeningService happeningService, HappeningMapper happeningMapper) {
-        this.happeningService = happeningService;
-        this.happeningMapper = happeningMapper;
+    public HappeningController() {
     }
 
     @GetMapping("/all")
@@ -32,6 +31,28 @@ public class HappeningController {
         List<Happening> allHappenings = happeningService.findAll();
         return allHappenings;
     }
+
+    @GetMapping("/{id}")
+    public Happening byId(@PathVariable Long id) {
+
+        return happeningService.find(id);
+    }
+
+    // TODO Fix this conversion from entity to view model
+    /*@GetMapping("/{id}")
+    public HappeningViewModel byId(@PathVariable Long id) {
+
+        Happening happening = happeningService.find(id);
+
+        if (happening == null) {
+            throw new EntityNotFoundException();
+        }
+
+        HappeningViewModel happeningViewModel = this.happeningMapper.convertToModel(happening);
+
+        return happeningViewModel;
+
+    }*/
 
     @PostMapping
     @Transactional
