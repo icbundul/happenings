@@ -24,13 +24,9 @@ public class HappeningController {
     @Autowired
     private HappeningMapper happeningMapper;
 
-    public HappeningController() {
-    }
-
     @GetMapping("/all")
     public List<Happening> all() {
-        List<Happening> allHappenings = happeningService.findAll();
-        return allHappenings;
+        return happeningService.findAll();
     }
 
     @GetMapping("/{id}")
@@ -42,27 +38,23 @@ public class HappeningController {
             throw new EntityNotFoundException();
         }
 
-        HappeningViewModel happeningViewModel = this.happeningMapper.convertToModel(happening);
-
-        return happeningViewModel;
-
+        return this.happeningMapper.convertToModel(happening);
     }
 
     @PostMapping("/")
+    @Transactional
     public Happening savePost(@RequestBody HappeningViewModel happeningViewModel, BindingResult bindingResult) {
 
-        Happening happeningEntity = save (happeningViewModel, bindingResult);
-        return happeningEntity;
+        return save (happeningViewModel, bindingResult);
     }
 
     @PutMapping("/")
+    @Transactional
     public Happening savePut(@RequestBody HappeningViewModel happeningViewModel, BindingResult bindingResult) {
 
-        Happening happeningEntity = save (happeningViewModel, bindingResult);
-        return happeningEntity;
+        return save (happeningViewModel, bindingResult);
     }
 
-    @Transactional
     public Happening save(@RequestBody HappeningViewModel happeningViewModel, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             throw new HappeningValidationException();
