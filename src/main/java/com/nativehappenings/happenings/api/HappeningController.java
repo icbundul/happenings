@@ -35,7 +35,9 @@ public class HappeningController {
         Happening happening = happeningService.find(id);
 
         if (happening == null) {
-            throw new EntityNotFoundException();
+            return null;
+            // TODO To much Exceptions for EntityNotFoundException, figure out what to do with this.
+            //throw new EntityNotFoundException();
         }
 
         return this.happeningMapper.convertToModel(happening);
