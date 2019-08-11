@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -33,13 +34,6 @@ public class HappeningController {
     }
 
     @GetMapping("/{id}")
-    public Happening byId(@PathVariable Long id) {
-
-        return happeningService.find(id);
-    }
-
-    // TODO Fix this conversion from entity to view model
-    /*@GetMapping("/{id}")
     public HappeningViewModel byId(@PathVariable Long id) {
 
         Happening happening = happeningService.find(id);
@@ -52,9 +46,22 @@ public class HappeningController {
 
         return happeningViewModel;
 
-    }*/
+    }
 
-    @PostMapping
+    @PostMapping("/")
+    public Happening savePost(@RequestBody HappeningViewModel happeningViewModel, BindingResult bindingResult) {
+
+        Happening happeningEntity = save (happeningViewModel, bindingResult);
+        return happeningEntity;
+    }
+
+    @PutMapping("/")
+    public Happening savePut(@RequestBody HappeningViewModel happeningViewModel, BindingResult bindingResult) {
+
+        Happening happeningEntity = save (happeningViewModel, bindingResult);
+        return happeningEntity;
+    }
+
     @Transactional
     public Happening save(@RequestBody HappeningViewModel happeningViewModel, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
