@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -76,9 +77,9 @@ public class HappeningController {
         this.happeningService.deleteById(id);
     }
 
-    @GetMapping("/?name={term}")
-    public List<Happening> getAllHappeningsByNameContains(@PathVariable String term) {
-        return happeningService.findByNameContains(term);
+    @GetMapping("/search")
+    public List<Happening> getAllHappeningsByNameContains(HttpServletRequest request) {
+        return happeningService.findByNameContains(request.getParameter("name"));
     }
 
     //-------------------
