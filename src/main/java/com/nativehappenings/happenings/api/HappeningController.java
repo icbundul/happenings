@@ -76,6 +76,11 @@ public class HappeningController {
         this.happeningService.deleteById(id);
     }
 
+    @GetMapping("/?name={term}")
+    public List<Happening> getAllHappeningsByNameContains(@PathVariable String term) {
+        return happeningService.findByNameContains(term);
+    }
+
     //-------------------
     // getter and setter
     //-------------------

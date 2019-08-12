@@ -47,4 +47,9 @@ public class HappeningServiceImpl implements HappeningService {
     public void deleteById(Long id) {
         happeningDAO.deleteById(id);
     }
+
+    @Override
+    public List<Happening> findByNameContains(String name) {
+        return happeningDAO.findAllByNameContains(name);
+    }
 }
