@@ -44,6 +44,7 @@ public class HappeningPlaceServiceImpl implements HappeningPlaceService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         happeningPlaceDAO.deleteById(id);
     }

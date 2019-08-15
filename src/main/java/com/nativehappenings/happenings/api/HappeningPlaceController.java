@@ -55,7 +55,7 @@ public class HappeningPlaceController {
         return happeningPlaceViewModel;
     }
 
-    @GetMapping("/byHappening/{happeningId}")
+    @GetMapping("/{happeningId}")
     public List<HappeningPlaceViewModel> byHappening(@PathVariable Long happeningId) {
         List<HappeningPlace> happeningPlaces = new ArrayList<>();
 
@@ -86,7 +86,7 @@ public class HappeningPlaceController {
         return happeningPlaceEntity;
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Long id) {
         this.happeningPlaceService.deleteById(id);
     }

@@ -3,6 +3,7 @@ package com.nativehappenings.happenings.model;
 import org.springframework.core.annotation.Order;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +11,9 @@ import java.util.List;
 // @author ivanc 01.05.2019
 @Entity
 @Table(name = "Happenings")
-public class Happening extends BaseEntity {
+public class Happening extends BaseEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HappeningPlaceMapperImpl implements HappeningPlaceMapper {
+public class HappeningPlaceMapperImpl extends BaseEntityMapper implements HappeningPlaceMapper {
 
     @Autowired
     private HappeningDAO happeningDAO;
@@ -21,6 +21,8 @@ public class HappeningPlaceMapperImpl implements HappeningPlaceMapper {
     @Override
     public HappeningPlaceViewModel convertToModel(HappeningPlace entity) {
         HappeningPlaceViewModel viewModel = new HappeningPlaceViewModel();
+
+        viewModel = (HappeningPlaceViewModel) convertToBaseEntityViewModel(entity, viewModel);
         viewModel.setAdress(entity.getAdress());
         viewModel.setPlaceName(entity.getPlaceName());
         viewModel.setLocationX(entity.getLocationX());
@@ -28,6 +30,7 @@ public class HappeningPlaceMapperImpl implements HappeningPlaceMapper {
         viewModel.setDateFrom(entity.getDateFrom());
         viewModel.setDateTo(entity.getDateTo());
         viewModel.setHappening(entity.getHappening());
+        viewModel.setOrderNumber(entity.getOrderNumber());
 
         return viewModel;
     }
@@ -36,7 +39,7 @@ public class HappeningPlaceMapperImpl implements HappeningPlaceMapper {
     public HappeningPlace convertToEntity(HappeningPlaceViewModel viewModel) {
         Happening happening = this.happeningDAO.findById(viewModel.getHappening().getId()).get();
         HappeningPlace entity = new HappeningPlace(viewModel.getPlaceName(), viewModel.getAdress(),
-                viewModel.getLocationX(), viewModel.getLocationY(), viewModel.getDateFrom(), viewModel.getDateTo(), happening);
+                viewModel.getLocationX(), viewModel.getLocationY(), viewModel.getDateFrom(), viewModel.getDateTo(), viewModel.getOrderNumber(), happening);
 
         return entity;
     }

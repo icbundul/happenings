@@ -19,6 +19,8 @@ public class HappeningPlaceViewModel extends BaseEntityViewModel {
 
     private Date dateTo;
 
+    private Integer orderNumber;
+
     @NotNull
     private Happening happening;
 
@@ -80,5 +82,13 @@ public class HappeningPlaceViewModel extends BaseEntityViewModel {
 
     public void setHappening(Happening happening) {
         this.happening = happening;
+    }
+
+    public Integer getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(Integer orderNumber) {
+        this.orderNumber = orderNumber;
     }
 }
