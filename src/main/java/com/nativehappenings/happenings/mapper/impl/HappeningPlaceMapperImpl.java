@@ -37,8 +37,10 @@ public class HappeningPlaceMapperImpl extends BaseEntityMapper implements Happen
 
     @Override
     public HappeningPlace convertToEntity(HappeningPlaceViewModel viewModel) {
+
         Happening happening = this.happeningDAO.findById(viewModel.getHappening().getId()).get();
-        HappeningPlace entity = new HappeningPlace(viewModel.getPlaceName(), viewModel.getAdress(),
+
+        HappeningPlace entity = new HappeningPlace(viewModel.getId(),viewModel.getPlaceName(), viewModel.getAdress(),
                 viewModel.getLocationX(), viewModel.getLocationY(), viewModel.getDateFrom(), viewModel.getDateTo(), viewModel.getOrderNumber(), happening);
 
         return entity;
