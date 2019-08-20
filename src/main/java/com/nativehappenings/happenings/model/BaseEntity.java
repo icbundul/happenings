@@ -1,13 +1,13 @@
 package com.nativehappenings.happenings.model;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import com.nativehappenings.happenings.listener.BaseEntityListener;
+
+import javax.persistence.*;
 import java.util.Date;
 
 // @author bandi 01.05.2019
 @MappedSuperclass
+@EntityListeners(BaseEntityListener.class)
 public abstract class BaseEntity {
 
     public abstract Long getId();
