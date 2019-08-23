@@ -34,8 +34,7 @@ public class Happening extends BaseEntity implements Serializable {
     @Column(name = "textHr", length = 6000)
     private String textHr;
 
-    @OneToMany(mappedBy = "happening")
-    @OrderColumn
+    @OneToMany(mappedBy = "happening", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HappeningPlace> happeningPlaces = new ArrayList<>();
 
     //------------------------
