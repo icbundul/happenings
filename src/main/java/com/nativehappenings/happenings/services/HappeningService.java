@@ -9,4 +9,6 @@ public interface HappeningService extends GenericTemplatingService<Happening> {
     void deleteById(Long id);
 
     List<Happening> findByNameContains(String name);
+
+    List<Happening.HappeningType> findAllHappeningTypes();
 }

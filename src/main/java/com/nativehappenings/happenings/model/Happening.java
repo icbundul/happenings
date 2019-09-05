@@ -37,6 +37,15 @@ public class Happening extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "happening", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HappeningPlace> happeningPlaces = new ArrayList<>();
 
+    @ManyToOne(optional = true)
+    private HappeningType happeningType;
+
+    @Entity
+    @DiscriminatorValue("happeningType")
+    public static class HappeningType extends BaseType {
+        private static final long serialVersionUID = 1L;
+    }
+
     //------------------------
     // Constructor
     //------------------------

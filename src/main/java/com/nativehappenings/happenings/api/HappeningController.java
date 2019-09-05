@@ -30,6 +30,11 @@ public class HappeningController {
         return happeningService.findAll();
     }
 
+    @GetMapping("/allHappeningTypes")
+    public List<Happening.HappeningType> allHappeningTypes() {
+        return happeningService.findAllHappeningTypes();
+    }
+
     @GetMapping("/{id}")
     public HappeningViewModel byId(@PathVariable Long id) {
 

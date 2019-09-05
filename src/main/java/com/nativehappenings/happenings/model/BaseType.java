@@ -21,6 +21,10 @@ public class BaseType {
     @ManyToOne(fetch = FetchType.LAZY)
     private BaseType parent;
 
+    public BaseType() {
+
+    }
+
     public BaseType(Long id, String nameKey) {
         this.id = id;
         this.nameKey = nameKey;
