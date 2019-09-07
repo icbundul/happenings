@@ -4,6 +4,7 @@ import com.nativehappenings.happenings.api.viewmodel.HappeningViewModel;
 import com.nativehappenings.happenings.exceptions.HappeningValidationException;
 import com.nativehappenings.happenings.mapper.HappeningMapper;
 import com.nativehappenings.happenings.model.Happening;
+import com.nativehappenings.happenings.model.HappeningType;
 import com.nativehappenings.happenings.services.HappeningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -31,7 +32,7 @@ public class HappeningController {
     }
 
     @GetMapping("/allHappeningTypes")
-    public List<Happening.HappeningType> allHappeningTypes() {
+    public List<HappeningType> allHappeningTypes() {
         return happeningService.findAllHappeningTypes();
     }
 

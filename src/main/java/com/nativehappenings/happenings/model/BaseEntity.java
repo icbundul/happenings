@@ -14,9 +14,11 @@ public abstract class BaseEntity {
 
     public abstract void setId(Long id);
 
+    @Column(updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date createdDatetime;
 
+    @Column(updatable = false)
     private String createdBy;
 
     private String lastUpdatedBy;

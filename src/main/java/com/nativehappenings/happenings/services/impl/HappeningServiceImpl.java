@@ -3,6 +3,7 @@ package com.nativehappenings.happenings.services.impl;
 import com.nativehappenings.happenings.dao.HappeningDAO;
 import com.nativehappenings.happenings.dao.HappeningTypeDAO;
 import com.nativehappenings.happenings.model.Happening;
+import com.nativehappenings.happenings.model.HappeningType;
 import com.nativehappenings.happenings.services.HappeningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,8 +48,13 @@ public class HappeningServiceImpl implements HappeningService {
     }
 
     @Override
-    public List<Happening.HappeningType> findAllHappeningTypes() {
+    public List<HappeningType> findAllHappeningTypes() {
         return happeningTypeDAO.findAll();
+    }
+
+    @Override
+    public HappeningType findHappeningTypeById(Long id) {
+        return happeningTypeDAO.findById(id).orElse(null);
     }
 
     @Override

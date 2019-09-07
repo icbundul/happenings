@@ -14,9 +14,15 @@ public class HappeningViewModel extends BaseEntityViewModel {
 
     private String textHr;
 
+    private Long happeningType;
+
     //------------------------
     // GETTERS AND SETTERS
     //------------------------
+
+
+    public HappeningViewModel() {
+    }
 
     public String getName() {
         return name;
@@ -56,5 +62,13 @@ public class HappeningViewModel extends BaseEntityViewModel {
 
     public void setTextHr(String textHr) {
         this.textHr = textHr;
+    }
+
+    public Long getHappeningType() {
+        return happeningType;
+    }
+
+    public void setHappeningType(Long happeningType) {
+        this.happeningType = happeningType;
     }
 }

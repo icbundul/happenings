@@ -40,12 +40,6 @@ public class Happening extends BaseEntity implements Serializable {
     @ManyToOne(optional = true)
     private HappeningType happeningType;
 
-    @Entity
-    @DiscriminatorValue("happeningType")
-    public static class HappeningType extends BaseType {
-        private static final long serialVersionUID = 1L;
-    }
-
     //------------------------
     // Constructor
     //------------------------
@@ -53,7 +47,7 @@ public class Happening extends BaseEntity implements Serializable {
     protected Happening() {
     }
 
-    public Happening(String name, Date dateFrom, Date dateTo, String text, String textHr) {
+    public Happening(String name, Date dateFrom, Date dateTo, String text, String textHr, HappeningType happeningType) {
 
         this();
         this.name = name;
@@ -61,12 +55,12 @@ public class Happening extends BaseEntity implements Serializable {
         this.dateTo = dateTo;
         this.text = text;
         this.textHr = textHr;
-        this.happeningPlaces = happeningPlaces;
+        this.happeningType = happeningType;
     }
 
-    public Happening(Long id, String name, Date dateFrom, Date dateTo, String text, String textHr) {
+    public Happening(Long id, String name, Date dateFrom, Date dateTo, String text, String textHr, HappeningType happeningType) {
 
-        this(name, dateFrom, dateTo, text, textHr);
+        this(name, dateFrom, dateTo, text, textHr, happeningType);
         this.id = id;
     }
 
@@ -122,5 +116,13 @@ public class Happening extends BaseEntity implements Serializable {
 
     public void setTextHr(String textHr) {
         this.textHr = textHr;
+    }
+
+    public HappeningType getHappeningType() {
+        return happeningType;
+    }
+
+    public void setHappeningType(HappeningType happeningType) {
+        this.happeningType = happeningType;
     }
 }

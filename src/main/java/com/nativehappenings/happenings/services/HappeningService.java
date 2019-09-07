@@ -1,6 +1,7 @@
 package com.nativehappenings.happenings.services;
 
 import com.nativehappenings.happenings.model.Happening;
+import com.nativehappenings.happenings.model.HappeningType;
 
 import java.util.List;
 
@@ -10,5 +11,7 @@ public interface HappeningService extends GenericTemplatingService<Happening> {
 
     List<Happening> findByNameContains(String name);
 
-    List<Happening.HappeningType> findAllHappeningTypes();
+    List<HappeningType> findAllHappeningTypes();
+
+    HappeningType findHappeningTypeById(Long id);
 }
