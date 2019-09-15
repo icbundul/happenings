@@ -1,16 +1,15 @@
 package com.nativehappenings.happenings.api;
 
+import com.nativehappenings.happenings.api.viewmodel.HappeningTypeViewModel;
 import com.nativehappenings.happenings.api.viewmodel.HappeningViewModel;
 import com.nativehappenings.happenings.exceptions.HappeningValidationException;
 import com.nativehappenings.happenings.mapper.HappeningMapper;
 import com.nativehappenings.happenings.model.Happening;
-import com.nativehappenings.happenings.model.HappeningType;
 import com.nativehappenings.happenings.services.HappeningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -27,13 +26,13 @@ public class HappeningController {
     private HappeningMapper happeningMapper;
 
     @GetMapping("/all")
-    public List<Happening> all() {
-        return happeningService.findAll();
+    public List<HappeningViewModel> all() {
+        return happeningMapper.convertViewModelListFromEntityList(happeningService.findAll());
     }
 
     @GetMapping("/allHappeningTypes")
-    public List<HappeningType> allHappeningTypes() {
-        return happeningService.findAllHappeningTypes();
+    public List<HappeningTypeViewModel> allHappeningTypes() {
+        return happeningMapper.convertTypeViewModelListFromTypeEntityList(happeningService.findAllHappeningTypes());
     }
 
     @GetMapping("/{id}")

@@ -7,4 +7,7 @@ import javax.persistence.Entity;
 @DiscriminatorValue("happeningType")
 public class HappeningType extends BaseType {
     private static final long serialVersionUID = 1L;
+
+    public HappeningType() {
+    }
 }

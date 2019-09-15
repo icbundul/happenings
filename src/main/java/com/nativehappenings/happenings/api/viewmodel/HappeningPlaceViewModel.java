@@ -1,8 +1,8 @@
 package com.nativehappenings.happenings.api.viewmodel;
 
 import com.nativehappenings.happenings.model.Happening;
+import com.nativehappenings.happenings.model.HappeningType;
 
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class HappeningPlaceViewModel extends BaseEntityViewModel {
@@ -21,8 +21,9 @@ public class HappeningPlaceViewModel extends BaseEntityViewModel {
 
     private Integer orderNumber;
 
-    @NotNull
     private Happening happening;
+
+    private HappeningType happeningType;
 
     //------------------------
     // GETTERS AND SETTERS
@@ -90,5 +91,13 @@ public class HappeningPlaceViewModel extends BaseEntityViewModel {
 
     public void setOrderNumber(Integer orderNumber) {
         this.orderNumber = orderNumber;
+    }
+
+    public HappeningType getHappeningType() {
+        return happeningType;
+    }
+
+    public void setHappeningType(HappeningType happeningType) {
+        this.happeningType = happeningType;
     }
 }

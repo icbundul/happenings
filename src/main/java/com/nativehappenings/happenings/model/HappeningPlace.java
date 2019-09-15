@@ -39,7 +39,7 @@ public class HappeningPlace extends BaseEntity implements Serializable {
     private Happening happening;
 
     @OneToMany(mappedBy = "happeningPlace")
-    private List<PlaceOfInterest> placesOfIntrests = new ArrayList<>();
+    private List<PlaceOfInterest> placesOfInterest = new ArrayList<>();
 
     //------------------------
     // Constructors
@@ -139,5 +139,13 @@ public class HappeningPlace extends BaseEntity implements Serializable {
 
     public void setOrderNumber(Integer orderNumber) {
         this.orderNumber = orderNumber;
+    }
+
+    public List<PlaceOfInterest> getPlacesOfInterest() {
+        return placesOfInterest;
+    }
+
+    public void setPlacesOfInterest(List<PlaceOfInterest> placesOfInterest) {
+        this.placesOfInterest = placesOfInterest;
     }
 }

@@ -1,5 +1,7 @@
 package com.nativehappenings.happenings.api.viewmodel;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.Date;
 
 public class HappeningViewModel extends BaseEntityViewModel {
@@ -14,7 +16,8 @@ public class HappeningViewModel extends BaseEntityViewModel {
 
     private String textHr;
 
-    private Long happeningType;
+    @JsonManagedReference
+    private HappeningTypeViewModel happeningType;
 
     //------------------------
     // GETTERS AND SETTERS
@@ -64,11 +67,11 @@ public class HappeningViewModel extends BaseEntityViewModel {
         this.textHr = textHr;
     }
 
-    public Long getHappeningType() {
+    public HappeningTypeViewModel getHappeningType() {
         return happeningType;
     }
 
-    public void setHappeningType(Long happeningType) {
+    public void setHappeningType(HappeningTypeViewModel happeningType) {
         this.happeningType = happeningType;
     }
 }
