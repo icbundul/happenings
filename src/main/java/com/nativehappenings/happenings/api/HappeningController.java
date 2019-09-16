@@ -64,6 +64,7 @@ public class HappeningController {
     }
 
     public Happening save(@RequestBody HappeningViewModel happeningViewModel, BindingResult bindingResult) {
+
         if(bindingResult.hasErrors()) {
             throw new HappeningValidationException();
         }

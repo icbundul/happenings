@@ -1,10 +1,13 @@
 package com.nativehappenings.happenings.api.viewmodel;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class HappeningViewModel extends BaseEntityViewModel {
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@id")
+public class HappeningViewModel extends BaseEntityViewModel implements Serializable {
 
     private String name;
 
@@ -16,13 +19,12 @@ public class HappeningViewModel extends BaseEntityViewModel {
 
     private String textHr;
 
-    @JsonManagedReference
+   // @JsonManagedReference
     private HappeningTypeViewModel happeningType;
 
     //------------------------
     // GETTERS AND SETTERS
     //------------------------
-
 
     public HappeningViewModel() {
     }

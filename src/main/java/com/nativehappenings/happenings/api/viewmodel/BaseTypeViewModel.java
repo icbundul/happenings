@@ -1,7 +1,9 @@
 package com.nativehappenings.happenings.api.viewmodel;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@id")
 public class BaseTypeViewModel {
 
     private Long id;
@@ -12,7 +14,7 @@ public class BaseTypeViewModel {
 
     private Integer orderNumber;
 
-    @JsonManagedReference
+    //@JsonManagedReference
     private BaseTypeViewModel parent;
 
     public BaseTypeViewModel() {
