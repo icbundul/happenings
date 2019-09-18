@@ -1,18 +1,23 @@
 package com.nativehappenings.happenings.api.viewmodel;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@id")
 public class HappeningViewModel extends BaseEntityViewModel implements Serializable {
 
+    @NotBlank
     private String name;
 
+    @JsonFormat(pattern="dd.MM.yyyy")
     private Date dateFrom;
 
+   @JsonFormat(pattern="dd.MM.yyyy")
     private Date dateTo;
 
     private String text;

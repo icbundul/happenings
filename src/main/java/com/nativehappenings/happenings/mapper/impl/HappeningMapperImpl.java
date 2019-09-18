@@ -52,7 +52,7 @@ public class HappeningMapperImpl extends BaseEntityMapper implements HappeningMa
 
         Happening entity = new Happening(viewModel.getId(),viewModel.getName(),
                 viewModel.getDateFrom(), viewModel.getDateTo(), viewModel.getText(), viewModel.getTextHr(),
-                happeningType);
+                happeningType, viewModel.getNotes());
 
         return entity;
     }

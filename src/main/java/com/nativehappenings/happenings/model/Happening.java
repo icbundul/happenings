@@ -47,9 +47,10 @@ public class Happening extends BaseEntity implements Serializable {
     protected Happening() {
     }
 
-    public Happening(String name, Date dateFrom, Date dateTo, String text, String textHr, HappeningType happeningType) {
+    public Happening(String name, Date dateFrom, Date dateTo, String text, String textHr, HappeningType happeningType, String notes) {
 
         this();
+        super.setNotes(notes);
         this.name = name;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
@@ -58,9 +59,9 @@ public class Happening extends BaseEntity implements Serializable {
         this.happeningType = happeningType;
     }
 
-    public Happening(Long id, String name, Date dateFrom, Date dateTo, String text, String textHr, HappeningType happeningType) {
+    public Happening(Long id, String name, Date dateFrom, Date dateTo, String text, String textHr, HappeningType happeningType, String notes) {
 
-        this(name, dateFrom, dateTo, text, textHr, happeningType);
+        this(name, dateFrom, dateTo, text, textHr, happeningType, notes);
         this.id = id;
     }
 
