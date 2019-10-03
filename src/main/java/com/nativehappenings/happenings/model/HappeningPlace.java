@@ -10,8 +10,10 @@ import java.util.List;
 
 // @author ivanc 01.05.2018
 @Entity
-@Table(name = "HappeningPlaces")
-public class HappeningPlace extends BaseEntity implements Serializable {
+@Table(name = "HappeningPlaces", indexes = {
+        @Index(name = "INDX_HapPlac_hapId_FK", columnList = "fk_happening")
+})
+public class HappeningPlace extends OrderedBaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -27,8 +29,6 @@ public class HappeningPlace extends BaseEntity implements Serializable {
     private Long locationX;
 
     private Long locationY;
-
-    private Integer orderNumber = 0;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateFrom;
@@ -59,7 +59,7 @@ public class HappeningPlace extends BaseEntity implements Serializable {
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.happening = happening;
-        this.orderNumber = orderNumber;
+        super.setOrderNumber(orderNumber);
     }
 
     public HappeningPlace(Long id, String placeName, String adress, Long locationX, Long locationY, Date dateFrom, Date dateTo, Integer orderNumber, Happening happening) {
@@ -134,14 +134,6 @@ public class HappeningPlace extends BaseEntity implements Serializable {
 
     public void setHappening(Happening happening) {
         this.happening = happening;
-    }
-
-    public Integer getOrderNumber() {
-        return orderNumber;
-    }
-
-    public void setOrderNumber(Integer orderNumber) {
-        this.orderNumber = orderNumber;
     }
 
     public List<PlaceOfInterest> getPlacesOfInterest() {

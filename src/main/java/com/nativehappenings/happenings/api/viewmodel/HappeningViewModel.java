@@ -15,10 +15,10 @@ public class HappeningViewModel extends BaseEntityViewModel implements Serializa
     @NotBlank
     private String name;
 
-    @JsonFormat(pattern="dd.MM.yyyy")
+    // @JsonFormat(pattern="dd.MM.yyyy")
     private Date dateFrom;
 
-    @JsonFormat(pattern="dd.MM.yyyy")
+    // @JsonFormat(pattern="dd.MM.yyyy")
     private Date dateTo;
 
     private String text;

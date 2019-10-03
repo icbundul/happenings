@@ -1,8 +1,5 @@
 package com.nativehappenings.happenings.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.core.annotation.Order;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,7 +8,9 @@ import java.util.List;
 
 // @author ivanc 01.05.2019
 @Entity
-@Table(name = "Happenings")
+@Table(name = "Happenings", indexes = {
+        @Index(name = "INDX_Happ_happType_FK", columnList = "happening_type_id")
+})
 public class Happening extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,11 +22,11 @@ public class Happening extends BaseEntity implements Serializable {
 
     private String name;
 
-    @JsonFormat(pattern="dd.MM.yyyy")
+    // @JsonFormat(pattern="dd.MM.yyyy")
     @Temporal(TemporalType.DATE)
     private Date dateFrom;
 
-    @JsonFormat(pattern="dd.MM.yyyy")
+    // @JsonFormat(pattern="dd.MM.yyyy")
     @Temporal(TemporalType.DATE)
     private Date dateTo;
 
@@ -38,6 +37,7 @@ public class Happening extends BaseEntity implements Serializable {
     private String textHr;
 
     @OneToMany(mappedBy = "happening", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderColumn(name="orderNumber")
     private List<HappeningPlace> happeningPlaces = new ArrayList<>();
 
     @ManyToOne(optional = true)
