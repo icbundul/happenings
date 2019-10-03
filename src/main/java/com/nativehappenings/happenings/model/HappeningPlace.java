@@ -1,5 +1,7 @@
 package com.nativehappenings.happenings.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ public class HappeningPlace extends BaseEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateTo;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "fk_happening")
     private Happening happening;

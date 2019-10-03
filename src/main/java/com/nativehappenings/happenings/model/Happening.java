@@ -1,5 +1,6 @@
 package com.nativehappenings.happenings.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.core.annotation.Order;
 
 import javax.persistence.*;
@@ -22,9 +23,11 @@ public class Happening extends BaseEntity implements Serializable {
 
     private String name;
 
+    @JsonFormat(pattern="dd.MM.yyyy")
     @Temporal(TemporalType.DATE)
     private Date dateFrom;
 
+    @JsonFormat(pattern="dd.MM.yyyy")
     @Temporal(TemporalType.DATE)
     private Date dateTo;
 
@@ -34,7 +37,7 @@ public class Happening extends BaseEntity implements Serializable {
     @Column(name = "textHr", length = 6000)
     private String textHr;
 
-    @OneToMany(mappedBy = "happening", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "happening", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HappeningPlace> happeningPlaces = new ArrayList<>();
 
     @ManyToOne(optional = true)
@@ -47,7 +50,8 @@ public class Happening extends BaseEntity implements Serializable {
     protected Happening() {
     }
 
-    public Happening(String name, Date dateFrom, Date dateTo, String text, String textHr, HappeningType happeningType, String notes) {
+    public Happening(String name, Date dateFrom, Date dateTo, String text, String textHr,
+                     HappeningType happeningType, String notes, List<HappeningPlace> happeningPlaces) {
 
         this();
         super.setNotes(notes);
@@ -57,11 +61,13 @@ public class Happening extends BaseEntity implements Serializable {
         this.text = text;
         this.textHr = textHr;
         this.happeningType = happeningType;
+        this.happeningPlaces = happeningPlaces;
     }
 
-    public Happening(Long id, String name, Date dateFrom, Date dateTo, String text, String textHr, HappeningType happeningType, String notes) {
+    public Happening(Long id, String name, Date dateFrom, Date dateTo, String text, String textHr,
+                     HappeningType happeningType, String notes, List<HappeningPlace> happeningPlaces) {
 
-        this(name, dateFrom, dateTo, text, textHr, happeningType, notes);
+        this(name, dateFrom, dateTo, text, textHr, happeningType, notes, happeningPlaces);
         this.id = id;
     }
 
@@ -125,5 +131,13 @@ public class Happening extends BaseEntity implements Serializable {
 
     public void setHappeningType(HappeningType happeningType) {
         this.happeningType = happeningType;
+    }
+
+    public List<HappeningPlace> getHappeningPlaces() {
+        return happeningPlaces;
+    }
+
+    public void setHappeningPlaces(List<HappeningPlace> happeningPlaces) {
+        this.happeningPlaces = happeningPlaces;
     }
 }

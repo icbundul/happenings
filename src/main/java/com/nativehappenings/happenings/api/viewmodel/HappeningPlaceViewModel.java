@@ -1,12 +1,15 @@
 package com.nativehappenings.happenings.api.viewmodel;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.nativehappenings.happenings.model.Happening;
-import com.nativehappenings.happenings.model.HappeningType;
-
+import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 import java.util.Date;
 
-public class HappeningPlaceViewModel extends BaseEntityViewModel {
+public class HappeningPlaceViewModel extends BaseEntityViewModel implements Serializable {
 
+    @NotBlank
     private String placeName;
 
     private String adress;
@@ -15,15 +18,17 @@ public class HappeningPlaceViewModel extends BaseEntityViewModel {
 
     private Long locationY;
 
+    @JsonFormat(pattern="dd.MM.yyyy")
     private Date dateFrom;
 
+    @JsonFormat(pattern="dd.MM.yyyy")
     private Date dateTo;
 
     private Integer orderNumber;
 
     private Happening happening;
 
-    private HappeningType happeningType;
+    private Long happeningId;
 
     //------------------------
     // GETTERS AND SETTERS
@@ -93,11 +98,11 @@ public class HappeningPlaceViewModel extends BaseEntityViewModel {
         this.orderNumber = orderNumber;
     }
 
-    public HappeningType getHappeningType() {
-        return happeningType;
+    public Long getHappeningId() {
+        return happeningId;
     }
 
-    public void setHappeningType(HappeningType happeningType) {
-        this.happeningType = happeningType;
+    public void setHappeningId(Long happeningId) {
+        this.happeningId = happeningId;
     }
 }

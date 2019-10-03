@@ -1,12 +1,13 @@
 package com.nativehappenings.happenings.api.viewmodel;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
+import com.nativehappenings.happenings.model.HappeningPlace;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@id")
 public class HappeningViewModel extends BaseEntityViewModel implements Serializable {
@@ -17,15 +18,17 @@ public class HappeningViewModel extends BaseEntityViewModel implements Serializa
     @JsonFormat(pattern="dd.MM.yyyy")
     private Date dateFrom;
 
-   @JsonFormat(pattern="dd.MM.yyyy")
+    @JsonFormat(pattern="dd.MM.yyyy")
     private Date dateTo;
 
     private String text;
 
     private String textHr;
 
-   // @JsonManagedReference
     private HappeningTypeViewModel happeningType;
+
+    @JsonIgnoreProperties("happening")
+    private List<HappeningPlace> happeningPlaces = new ArrayList<>();
 
     //------------------------
     // GETTERS AND SETTERS
@@ -80,5 +83,13 @@ public class HappeningViewModel extends BaseEntityViewModel implements Serializa
 
     public void setHappeningType(HappeningTypeViewModel happeningType) {
         this.happeningType = happeningType;
+    }
+
+    public List<HappeningPlace> getHappeningPlaces() {
+        return happeningPlaces;
+    }
+
+    public void setHappeningPlaces(List<HappeningPlace> happeningPlaces) {
+        this.happeningPlaces = happeningPlaces;
     }
 }

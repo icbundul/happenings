@@ -34,6 +34,7 @@ public class HappeningMapperImpl extends BaseEntityMapper implements HappeningMa
         viewModel.setDateTo(entity.getDateTo());
         viewModel.setText(entity.getText());
         viewModel.setTextHr(entity.getTextHr());
+        viewModel.setHappeningPlaces(entity.getHappeningPlaces());
 
         if (entity.getHappeningType() != null)
             viewModel.setHappeningType(baseTypeMapper.convertToTypeVewModel(entity.getHappeningType()));
@@ -52,7 +53,9 @@ public class HappeningMapperImpl extends BaseEntityMapper implements HappeningMa
 
         Happening entity = new Happening(viewModel.getId(),viewModel.getName(),
                 viewModel.getDateFrom(), viewModel.getDateTo(), viewModel.getText(), viewModel.getTextHr(),
-                happeningType, viewModel.getNotes());
+                happeningType, viewModel.getNotes(), viewModel.getHappeningPlaces());
+
+        entity.getHappeningPlaces().stream().forEach(hp -> hp.setHappening(entity));
 
         return entity;
     }

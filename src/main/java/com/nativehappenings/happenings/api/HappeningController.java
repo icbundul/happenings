@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,28 +57,26 @@ public class HappeningController {
 
     @PostMapping("/")
     @Transactional
-    public ResponseEntity<Happening> savePost(@RequestBody HappeningViewModel happeningViewModel, BindingResult bindingResult) {
+    public ResponseEntity<Happening> savePost(@RequestBody Happening happening, BindingResult bindingResult) {
 
-        return save (happeningViewModel, bindingResult);
+        return save (happening, bindingResult);
     }
 
     @PutMapping("/")
     @Transactional
-    public ResponseEntity<Happening> savePut(@RequestBody HappeningViewModel happeningViewModel, BindingResult bindingResult) {
+    public ResponseEntity<Happening> savePut(@RequestBody Happening happening, BindingResult bindingResult) {
 
-        return save (happeningViewModel, bindingResult);
+        return save (happening, bindingResult);
     }
 
-    public ResponseEntity<Happening> save(@RequestBody HappeningViewModel happeningViewModel, BindingResult bindingResult) {
+    public ResponseEntity<Happening> save(@RequestBody Happening happening, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()) {
             throw new HappeningValidationException();
         }
 
-        Happening happeningEntity = this.happeningMapper.convertToEntity(happeningViewModel);
-
         // save entity to database
-        return new ResponseEntity(this.happeningService.save(happeningEntity), HttpStatus.OK);
+        return new ResponseEntity(this.happeningService.save(happening), HttpStatus.OK);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
