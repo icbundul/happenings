@@ -10,6 +10,7 @@ import com.nativehappenings.happenings.services.HappeningService;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityNotFoundException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,7 +42,7 @@ public class HappeningPlaceController {
         return happeningPlacesViewModel;
     }
 
-    @GetMapping("/byId/{id}")
+    @GetMapping("/{id}")
     public HappeningPlaceViewModel byId(@PathVariable Long id) {
 
         HappeningPlace happeningPlace = this.happeningPlaceService.find(id);
@@ -89,5 +90,10 @@ public class HappeningPlaceController {
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Long id) {
         this.happeningPlaceService.deleteById(id);
+    }
+
+    @GetMapping("/search")
+    public List<HappeningPlace> getAllHappeningsByNameContains(HttpServletRequest request) {
+        return happeningPlaceService.findAllByPlaceNameContains(request.getParameter("searchTerm"));
     }
 }

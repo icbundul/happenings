@@ -12,4 +12,6 @@ public interface HappeningPlaceDAO extends JpaRepository<HappeningPlace, Long> {
 
     List<HappeningPlace> findAllByHappening(Happening happening);
 
+    List<HappeningPlace> findAllByPlaceNameContains(String name);
+
 }

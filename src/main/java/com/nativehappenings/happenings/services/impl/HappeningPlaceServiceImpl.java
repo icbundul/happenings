@@ -48,4 +48,9 @@ public class HappeningPlaceServiceImpl implements HappeningPlaceService {
     public void deleteById(Long id) {
         happeningPlaceDAO.deleteById(id);
     }
+
+    @Override
+    public List<HappeningPlace> findAllByPlaceNameContains(String name) {
+        return happeningPlaceDAO.findAllByPlaceNameContains(name);
+    }
 }

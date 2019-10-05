@@ -10,4 +10,6 @@ public interface HappeningPlaceService extends GenericTemplatingService<Happenin
     List<HappeningPlace> findAllByHappening(Happening happening);
 
     void deleteById(Long id);
+
+    List<HappeningPlace> findAllByPlaceNameContains(String name);
 }
