@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,14 +58,14 @@ public class HappeningController {
 
     @PostMapping("/")
     @Transactional
-    public ResponseEntity<Happening> savePost(@RequestBody Happening happening, BindingResult bindingResult) {
+    public ResponseEntity<Happening> savePost(@Valid @RequestBody Happening happening, BindingResult bindingResult) {
 
         return save (happening, bindingResult);
     }
 
     @PutMapping("/")
     @Transactional
-    public ResponseEntity<Happening> savePut(@RequestBody Happening happening, BindingResult bindingResult) {
+    public ResponseEntity<Happening> savePut(@Valid @RequestBody Happening happening, BindingResult bindingResult) {
 
         return save (happening, bindingResult);
     }
@@ -72,7 +73,7 @@ public class HappeningController {
     public ResponseEntity<Happening> save(@RequestBody Happening happening, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()) {
-            throw new HappeningValidationException();
+            throw new HappeningValidationException(bindingResult.getAllErrors().toString());
         }
 
         // save entity to database

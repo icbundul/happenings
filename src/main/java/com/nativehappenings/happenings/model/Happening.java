@@ -1,6 +1,7 @@
 package com.nativehappenings.happenings.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,6 +21,7 @@ public class Happening extends BaseEntity implements Serializable {
     @Column(updatable = false, nullable = false)
     private Long id;
 
+    @NotBlank
     private String name;
 
     // @JsonFormat(pattern="dd.MM.yyyy")

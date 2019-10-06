@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.xml.bind.ValidationException;
 
+//TODO i think this class wont cut for this, i will probably use something with BindingResult
+
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
