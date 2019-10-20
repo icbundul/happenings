@@ -1,12 +1,12 @@
 package com.nativehappenings.happenings.api.viewmodel;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.*;
 import com.nativehappenings.happenings.model.Happening;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@id")
 public class HappeningPlaceViewModel extends BaseEntityViewModel implements Serializable {
 
     @NotBlank
@@ -26,6 +26,7 @@ public class HappeningPlaceViewModel extends BaseEntityViewModel implements Seri
 
     private Integer orderNumber;
 
+    @JsonIgnoreProperties("happeningPlaces")
     private Happening happening;
 
     private Long happeningId;

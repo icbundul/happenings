@@ -7,28 +7,43 @@ import com.nativehappenings.happenings.model.Happening;
 import com.nativehappenings.happenings.model.HappeningPlace;
 import com.nativehappenings.happenings.services.HappeningPlaceService;
 import com.nativehappenings.happenings.services.HappeningService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/happeningplaces")
+@RequestMapping("/api/happeningplace")
 @CrossOrigin
 public class HappeningPlaceController {
 
+    @Autowired
     private HappeningPlaceService happeningPlaceService;
+
+    @Autowired
     private HappeningService happeningService;
+
+    @Autowired
     private HappeningPlaceMapper happeningPlaceMapper;
 
-    public HappeningPlaceController(HappeningPlaceService happeningPlaceService, HappeningService happeningService, HappeningPlaceMapper happeningPlaceMapper) {
+
+    public HappeningPlaceController() {
+
+    }
+
+    /*public HappeningPlaceController(HappeningPlaceService happeningPlaceService, HappeningService happeningService, HappeningPlaceMapper happeningPlaceMapper) {
         this.happeningPlaceService = happeningPlaceService;
         this.happeningService = happeningService;
         this.happeningPlaceMapper = happeningPlaceMapper;
-    }
+    }*/
 
     @GetMapping("/all")
     public List<HappeningPlaceViewModel> all() {
@@ -56,7 +71,7 @@ public class HappeningPlaceController {
         return happeningPlaceViewModel;
     }
 
-    @GetMapping("/{happeningId}")
+   /*@GetMapping("/{happeningId}")
     public List<HappeningPlaceViewModel> byHappening(@PathVariable Long happeningId) {
         List<HappeningPlace> happeningPlaces = new ArrayList<>();
 
@@ -71,20 +86,32 @@ public class HappeningPlaceController {
                 .collect(Collectors.toList());
 
         return happeningPlacesViewModels;
+    }*/
+
+    @PostMapping("/")
+    @Transactional
+    public ResponseEntity<HappeningPlace> savePost(@Valid @RequestBody HappeningPlace happeningPlace, BindingResult bindingResult) {
+
+        return save(happeningPlace, bindingResult);
     }
 
+    @PutMapping("/")
+    @Transactional
+    public ResponseEntity<HappeningPlace> savePut(@Valid @RequestBody HappeningPlace happeningPlace, BindingResult bindingResult) {
+
+        return save(happeningPlace, bindingResult);
+    }
+
+
     @PostMapping
-    public HappeningPlace save(@RequestBody HappeningPlaceViewModel happeningPlaceViewModel, BindingResult bindingResult) {
+    public ResponseEntity save(@RequestBody HappeningPlace happeningPlace, BindingResult bindingResult) {
+
         if (bindingResult.hasErrors()) {
-            throw new HappeningPlaceValidationException();
+            throw new HappeningPlaceValidationException(bindingResult.getAllErrors().toString());
         }
 
-        HappeningPlace happeningPlaceEntity = this.happeningPlaceMapper.convertToEntity(happeningPlaceViewModel);
-
         // save note instance to db
-        this.happeningPlaceService.save(happeningPlaceEntity);
-
-        return happeningPlaceEntity;
+        return new ResponseEntity(this.happeningPlaceService.save(happeningPlace), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
