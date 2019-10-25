@@ -5,6 +5,8 @@ import com.nativehappenings.happenings.exceptions.PlaceOfInterestValidationExcep
 import com.nativehappenings.happenings.mapper.PlaceOfInterestMapper;
 import com.nativehappenings.happenings.model.PlaceOfInterest;
 import com.nativehappenings.happenings.services.PlaceOfInterestService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,19 +35,30 @@ public class PlaceOfInterestController {
         return allPlaceOfInterests;
     }
 
+    @PostMapping("/")
+    @Transactional
+    public ResponseEntity<PlaceOfInterest> savePost(@Valid @RequestBody PlaceOfInterest placeOfInterest, BindingResult bindingResult) {
+
+        return save (placeOfInterest, bindingResult);
+    }
+
+    @PutMapping("/")
+    @Transactional
+    public ResponseEntity<PlaceOfInterest> savePut(@Valid @RequestBody PlaceOfInterest placeOfInterest, BindingResult bindingResult) {
+
+        return save (placeOfInterest, bindingResult);
+    }
+
     @PostMapping
     @Transactional
-    public PlaceOfInterest save(@RequestBody PlaceOfInterestViewModel placeOfInterestViewModel, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
-            throw new PlaceOfInterestValidationException();
+    public ResponseEntity<PlaceOfInterest> save(@RequestBody PlaceOfInterest placeOfInterest, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            throw new PlaceOfInterestValidationException(bindingResult.getAllErrors().toString());
         }
 
-        PlaceOfInterest placeOfInterestEntity = this.placeOfInterestMapper.convertToEntity(placeOfInterestViewModel);
-
         // save entity to database
-        this.placeOfInterestService.save(placeOfInterestEntity);
-
-        return placeOfInterestEntity;
+        return new ResponseEntity<PlaceOfInterest>(this.placeOfInterestService.save(placeOfInterest), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
