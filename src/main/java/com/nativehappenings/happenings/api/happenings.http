@@ -11,10 +11,9 @@
 
 GET {{host-url}}//happenings/all
 
-
 ###
 
-GET {{host-url}}//happenings/1
+GET {{host-url}}//happenings/104
 
 ###
 
@@ -41,17 +40,17 @@ DELETE {{host-url}}/happenings/1
 
 
 
-# API HAPPENINGPLACES
+# API HAPPENINGPLACE
 
-GET {{host-url}}//happeningplaces/all
-
-###
-
-GET {{host-url}}//happeningplaces/byId/2f
+GET {{host-url}}//happeningplace/all
 
 ###
 
-POST {{host-url}}//happeningplaces
+GET {{host-url}}//happeningplace/156
+
+###
+
+POST {{host-url}}//happeningplace
 Content-Type: application/json
 
 {
@@ -61,10 +60,19 @@ Content-Type: application/json
 }
 ###
 
-DELETE {{host-url}}//happeningplaces/1
+DELETE {{host-url}}//happeningplace/1
 
 ###
 
+# API PLACEOFINTERESTS
+
+GET {{host-url}}//placeofinterest/all
+
+###
+
+GET {{host-url}}//placeofinterest/1
+
+###
 
 # FEEDBACK
 

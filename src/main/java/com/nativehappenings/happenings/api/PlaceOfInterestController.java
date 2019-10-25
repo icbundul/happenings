@@ -8,8 +8,9 @@ import com.nativehappenings.happenings.services.PlaceOfInterestService;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-import javax.validation.ValidationException;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -47,11 +48,22 @@ public class PlaceOfInterestController {
         return placeOfInterestEntity;
     }
 
+    @GetMapping("/{id}")
+    public PlaceOfInterestViewModel byId(@PathVariable Long id) {
+
+        PlaceOfInterest placeOfInterest = placeOfInterestService.find(id);
+
+        if (placeOfInterest == null) {
+            // TODO To much Exceptions for EntityNotFoundException, figure out what to do with this.
+            throw new EntityNotFoundException(placeOfInterest.getClass().getSimpleName());
+        }
+
+        return this.placeOfInterestMapper.convertToModel(placeOfInterest);
+    }
+
     @DeleteMapping("/{id}")
     @Transactional
     public void delete(@PathVariable Long id) {
         this.placeOfInterestService.deleteById(id);
     }
-
-
 }

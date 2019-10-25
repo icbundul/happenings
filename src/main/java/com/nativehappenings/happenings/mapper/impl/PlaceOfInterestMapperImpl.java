@@ -19,6 +19,8 @@ public class PlaceOfInterestMapperImpl extends BaseEntityMapper implements Place
     @Override
     public PlaceOfInterestViewModel convertToModel(PlaceOfInterest entity) {
         PlaceOfInterestViewModel viewModel = new PlaceOfInterestViewModel();
+
+        viewModel = (PlaceOfInterestViewModel) convertToBaseEntityViewModel(entity, viewModel);
         viewModel.setName(entity.getName());
         viewModel.setLocationX(entity.getLocationX());
         viewModel.setLocationY(entity.getLocationY());
