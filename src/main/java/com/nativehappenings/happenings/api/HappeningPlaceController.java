@@ -29,21 +29,12 @@ public class HappeningPlaceController {
     private HappeningPlaceService happeningPlaceService;
 
     @Autowired
-    private HappeningService happeningService;
-
-    @Autowired
     private HappeningPlaceMapper happeningPlaceMapper;
 
 
     public HappeningPlaceController() {
 
     }
-
-    /*public HappeningPlaceController(HappeningPlaceService happeningPlaceService, HappeningService happeningService, HappeningPlaceMapper happeningPlaceMapper) {
-        this.happeningPlaceService = happeningPlaceService;
-        this.happeningService = happeningService;
-        this.happeningPlaceMapper = happeningPlaceMapper;
-    }*/
 
     @GetMapping("/all")
     public List<HappeningPlaceViewModel> all() {
@@ -70,23 +61,6 @@ public class HappeningPlaceController {
 
         return happeningPlaceViewModel;
     }
-
-   /*@GetMapping("/{happeningId}")
-    public List<HappeningPlaceViewModel> byHappening(@PathVariable Long happeningId) {
-        List<HappeningPlace> happeningPlaces = new ArrayList<>();
-
-        Happening happening = this.happeningService.find(happeningId);
-
-        if (happening != null) {
-            happeningPlaces = this.happeningPlaceService.findAllByHappening(happening);
-        }
-        // map to note view model
-        List<HappeningPlaceViewModel> happeningPlacesViewModels = happeningPlaces.stream()
-                .map(happeningPlace -> this.happeningPlaceMapper.convertToModel(happeningPlace))
-                .collect(Collectors.toList());
-
-        return happeningPlacesViewModels;
-    }*/
 
     @PostMapping("/")
     @Transactional

@@ -24,7 +24,7 @@ public class HappeningPlace extends OrderedBaseEntity implements Serializable {
 
     private String placeName;
 
-    private String adress;
+    private String address;
 
     private Long locationX;
 
@@ -44,16 +44,19 @@ public class HappeningPlace extends OrderedBaseEntity implements Serializable {
     @OneToMany(mappedBy = "happeningPlace")
     private List<PlaceOfInterest> placesOfInterest = new ArrayList<>();
 
+    @Transient
+    private Long happeningId;
+
     //------------------------
     // Constructors
     //------------------------
     protected HappeningPlace() {
     }
 
-    public HappeningPlace(String placeName, String adress, Long locationX, Long locationY, Date dateFrom, Date dateTo, Integer orderNumber, Happening happening) {
+    public HappeningPlace(String placeName, String address, Long locationX, Long locationY, Date dateFrom, Date dateTo, Integer orderNumber, Happening happening) {
         this();
         this.placeName = placeName;
-        this.adress = adress;
+        this.address = address;
         this.locationX = locationX;
         this.locationY = locationY;
         this.dateFrom = dateFrom;
@@ -62,8 +65,8 @@ public class HappeningPlace extends OrderedBaseEntity implements Serializable {
         super.setOrderNumber(orderNumber);
     }
 
-    public HappeningPlace(Long id, String placeName, String adress, Long locationX, Long locationY, Date dateFrom, Date dateTo, Integer orderNumber, Happening happening) {
-        this(placeName, adress, locationX, locationY, dateFrom, dateTo, orderNumber, happening);
+    public HappeningPlace(Long id, String placeName, String address, Long locationX, Long locationY, Date dateFrom, Date dateTo, Integer orderNumber, Happening happening) {
+        this(placeName, address, locationX, locationY, dateFrom, dateTo, orderNumber, happening);
         this.id = id;
     }
 
@@ -88,12 +91,12 @@ public class HappeningPlace extends OrderedBaseEntity implements Serializable {
         this.placeName = placeName;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Long getLocationX() {
@@ -142,5 +145,13 @@ public class HappeningPlace extends OrderedBaseEntity implements Serializable {
 
     public void setPlacesOfInterest(List<PlaceOfInterest> placesOfInterest) {
         this.placesOfInterest = placesOfInterest;
+    }
+
+    public Long getHappeningId() {
+        return happeningId;
+    }
+
+    public void setHappeningId(Long happeningId) {
+        this.happeningId = happeningId;
     }
 }

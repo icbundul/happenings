@@ -23,7 +23,7 @@ public class HappeningPlaceMapperImpl extends BaseEntityMapper implements Happen
         HappeningPlaceViewModel viewModel = new HappeningPlaceViewModel();
 
         viewModel = (HappeningPlaceViewModel) convertToBaseEntityViewModel(entity, viewModel);
-        viewModel.setAdress(entity.getAdress());
+        viewModel.setAddress(entity.getAddress());
         viewModel.setPlaceName(entity.getPlaceName());
         viewModel.setLocationX(entity.getLocationX());
         viewModel.setLocationY(entity.getLocationY());
@@ -40,7 +40,7 @@ public class HappeningPlaceMapperImpl extends BaseEntityMapper implements Happen
 
         Happening happening = this.happeningDAO.findById(viewModel.getHappening().getId()).get();
 
-        HappeningPlace entity = new HappeningPlace(viewModel.getId(),viewModel.getPlaceName(), viewModel.getAdress(),
+        HappeningPlace entity = new HappeningPlace(viewModel.getId(),viewModel.getPlaceName(), viewModel.getAddress(),
                 viewModel.getLocationX(), viewModel.getLocationY(), viewModel.getDateFrom(), viewModel.getDateTo(), viewModel.getOrderNumber(), happening);
 
         return entity;

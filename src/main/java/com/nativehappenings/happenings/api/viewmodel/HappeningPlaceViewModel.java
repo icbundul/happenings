@@ -12,16 +12,16 @@ public class HappeningPlaceViewModel extends BaseEntityViewModel implements Seri
     @NotBlank
     private String placeName;
 
-    private String adress;
+    private String address;
 
     private Long locationX;
 
     private Long locationY;
 
-    @JsonFormat(pattern="dd.MM.yyyy")
+    @JsonFormat(pattern="dd.MM.yyyy HH:mm")
     private Date dateFrom;
 
-    @JsonFormat(pattern="dd.MM.yyyy")
+    @JsonFormat(pattern="dd.MM.yyyy HH:mm")
     private Date dateTo;
 
     private Integer orderNumber;
@@ -43,12 +43,12 @@ public class HappeningPlaceViewModel extends BaseEntityViewModel implements Seri
         this.placeName = placeName;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Long getLocationX() {

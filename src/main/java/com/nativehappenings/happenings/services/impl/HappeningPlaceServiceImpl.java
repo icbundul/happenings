@@ -1,5 +1,6 @@
 package com.nativehappenings.happenings.services.impl;
 
+import com.nativehappenings.happenings.dao.HappeningDAO;
 import com.nativehappenings.happenings.dao.HappeningPlaceDAO;
 import com.nativehappenings.happenings.model.Happening;
 import com.nativehappenings.happenings.model.HappeningPlace;
@@ -16,9 +17,15 @@ public class HappeningPlaceServiceImpl implements HappeningPlaceService {
     @Autowired
     private HappeningPlaceDAO happeningPlaceDAO;
 
+    @Autowired
+    private HappeningDAO happeningDAO;
+
     @Override
     @Transactional
     public HappeningPlace save(HappeningPlace entity) {
+
+        persistHappeningEntityById(entity);
+
         return happeningPlaceDAO.save(entity);
     }
 
@@ -52,5 +59,16 @@ public class HappeningPlaceServiceImpl implements HappeningPlaceService {
     @Override
     public List<HappeningPlace> findAllByPlaceNameContains(String name) {
         return happeningPlaceDAO.findAllByPlaceNameContains(name);
+    }
+
+    public void persistHappeningEntityById(HappeningPlace happeningPlace) {
+
+        if (happeningPlace.getHappening() != null)
+            return;
+
+        if (happeningPlace.getHappeningId() == null)
+            return;
+
+        happeningPlace.setHappening(happeningDAO.findById(happeningPlace.getHappeningId()).orElse(null));
     }
 }
