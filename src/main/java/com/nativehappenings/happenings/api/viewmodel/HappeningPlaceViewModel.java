@@ -18,10 +18,10 @@ public class HappeningPlaceViewModel extends BaseEntityViewModel implements Seri
 
     private Long locationY;
 
-    @JsonFormat(pattern="dd.MM.yyyy HH:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
     private Date dateFrom;
 
-    @JsonFormat(pattern="dd.MM.yyyy HH:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
     private Date dateTo;
 
     private Integer orderNumber;
